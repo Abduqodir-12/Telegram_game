@@ -1,15 +1,17 @@
-const Token = '7329613415:AAHbwJsW0fTR8vyBlTw1OAM967mz0DGuf8M'
 const TelegramApi = require('node-telegram-bot-api');
+const Token = '7329613415:AAHbwJsW0fTR8vyBlTw1OAM967mz0DGuf8M'
 
 const bot = new TelegramApi(Token, {polling: true})
+
+const chats = {}
 
 const gameOptions = {
     replay_markup: JSON.stringify({
         inline_keyboard: [
-            [{text: '1', callback_data: '1'}],
-            [{text: '2', callback_data: '2'}],
-            [{text: '3', callback_data: '3'}],
-            [{text: '4', callback_data: '4'}]
+            [{text: '1', callback_data: '1'}, {text: '2', callback_data: '2'}, {text: '3', callback_data: '3'}],
+            [{text: '4', callback_data: '4'}, {text: '5', callback_data: '5'}, {text: '6', callback_data: '6'}],
+            [{text: '7', callback_data: '7'}, {text: '8', callback_data: '8'}, {text: '9', callback_data: '9'}],
+            [{text: '0', callback_data: '0'}]
         ] 
     })
 }
@@ -28,8 +30,6 @@ bot.setMyCommands([
     {command: '/game', description: 'oyn raqamni top'}
 ])
 
-const chats = {}
-
 const start = () => {
     bot.on('message', (msg) => {
         const text = msg.text;
@@ -41,20 +41,20 @@ const start = () => {
         if(text === '/info') {
             return bot.sendMessage(chatId, `szi ismiz ${msg.from.first_name}`)
         }
-        if(text === 'nma gap' || text === 'Nma gap' || text === 'Nima gap' || text === 'nima gap') {
-            return bot.sendMessage(chatId, 'Tinch ozinch')
-        }
-        if(text === 'tinch' || text === 'Tinch') {
-            return bot.sendMessage(chatId, 'Tinch bol')
-        }
-        if(text === 'hop rahmat' || text === 'Hop raxmat' || text === 'Hop rahmat' || text === 'hop raxmat') {
-            return bot.sendMessage(chatId, 'Ok')
-        }
+        // if(text === 'nma gap' || text === 'Nma gap' || text === 'Nima gap' || text === 'nima gap') {
+        //     return bot.sendMessage(chatId, 'Tinch ozinch')
+        // }
+        // if(text === 'tinch' || text === 'Tinch') {
+        //     return bot.sendMessage(chatId, 'Tinch bol')
+        // }
+        // if(text === 'hop rahmat' || text === 'Hop raxmat' || text === 'Hop rahmat' || text === 'hop raxmat') {
+        //     return bot.sendMessage(chatId, 'Ok')
+        // }
         if(text === '/game') {
             bot.sendMessage(chatId, 'Hozir men 0 dan 9 gacha son oylayman siz topishingiz kerak')
             const randomNumber = Math.floor(Math.random() * 10)
             chats[chatId] = randomNumber;
-            return bot.sendMessage(chatId, 'toping', gameOptions)
+            return bot.sendMessage(chatId, `toping`, gameOptions)
         }
         return bot.sendMessage(chatId, `Men sizni chunmayapman`)
     })
