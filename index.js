@@ -3,10 +3,32 @@ const TelegramApi = require('node-telegram-bot-api');
 
 const bot = new TelegramApi(Token, {polling: true})
 
+const gameOptions = {
+    replay_markup: JSON.stringify({
+        inline_keyboard: [
+            [{text: '1', callback_data: '1'}],
+            [{text: '2', callback_data: '2'}],
+            [{text: '3', callback_data: '3'}],
+            [{text: '4', callback_data: '4'}]
+        ] 
+    })
+}
+
+const againOptions = {
+    replay_markup: JSON.stringify({
+        inline_keyboard: [
+            [{text: 'Yana bir marta oynash', callback_data: '0'}]
+        ] 
+    })
+}
+
 bot.setMyCommands([
     {command: '/start', description: 'Salomlashish'},
-    {command: '/info', description: 'sz haqingizda informatsiya bersh'}
+    {command: '/info', description: 'sz haqingizda informatsiya bersh'},
+    {command: '/game', description: 'oyn raqamni top'}
 ])
+
+const chats = {}
 
 const start = () => {
     bot.on('message', (msg) => {
@@ -28,8 +50,23 @@ const start = () => {
         if(text === 'hop rahmat' || text === 'Hop raxmat' || text === 'Hop rahmat' || text === 'hop raxmat') {
             return bot.sendMessage(chatId, 'Ok')
         }
-        if(text === '/game')
-        return bot.sendMessage(chatId, `Men sizni chinmayapman`)
+        if(text === '/game') {
+            bot.sendMessage(chatId, 'Hozir men 0 dan 9 gacha son oylayman siz topishingiz kerak')
+            const randomNumber = Math.floor(Math.random() * 10)
+            chats[chatId] = randomNumber;
+            return bot.sendMessage(chatId, 'toping', gameOptions)
+        }
+        return bot.sendMessage(chatId, `Men sizni chunmayapman`)
+    })
+
+    bot.on('callback_query', (msg) => {
+        const data = msg.data;
+        const chatId = msg.message.chat.id;
+        if(data === chats[chatId]) {
+            return bot.sendMessage(chatId, 'Tabriklayman siz toptingiz', againOptions)
+        } else {
+            return bot.sendMessage(chatId, `Afsuski sz topa olmadingiz, u raqam ${chats[chatId]} edi`, againOptions)
+        }
     })
 }
 
