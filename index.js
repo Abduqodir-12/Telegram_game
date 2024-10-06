@@ -45,7 +45,7 @@ const start = () => {
         if(data === '/again') {
             return gameFunc(chatId);
         }
-        if(data === chats[chatId]) {
+        if(data == chats[chatId]) {
             return bot.sendMessage(chatId, 'Tabriklayman siz toptingiz', againOptions)
         } else {
             return bot.sendMessage(chatId, `Afsuski sz topa olmadingiz, u raqam ${chats[chatId]} edi`, againOptions)
