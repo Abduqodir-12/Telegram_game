@@ -41,15 +41,6 @@ const start = () => {
         if(text === '/info') {
             return bot.sendMessage(chatId, `szi ismiz ${msg.from.first_name}`)
         }
-        // if(text === 'nma gap' || text === 'Nma gap' || text === 'Nima gap' || text === 'nima gap') {
-        //     return bot.sendMessage(chatId, 'Tinch ozinch')
-        // }
-        // if(text === 'tinch' || text === 'Tinch') {
-        //     return bot.sendMessage(chatId, 'Tinch bol')
-        // }
-        // if(text === 'hop rahmat' || text === 'Hop raxmat' || text === 'Hop rahmat' || text === 'hop raxmat') {
-        //     return bot.sendMessage(chatId, 'Ok')
-        // }
         if(text === '/game') {
             bot.sendMessage(chatId, 'Hozir men 0 dan 9 gacha son oylayman siz topishingiz kerak')
             const randomNumber = Math.floor(Math.random() * 10)
@@ -71,3 +62,19 @@ const start = () => {
 }
 
 start()
+
+
+
+
+
+
+
+// if(text === 'nma gap' || text === 'Nma gap' || text === 'Nima gap' || text === 'nima gap') {
+//     return bot.sendMessage(chatId, 'Tinch ozinch')
+// }
+// if(text === 'tinch' || text === 'Tinch') {
+//     return bot.sendMessage(chatId, 'Tinch bol')
+// }
+// if(text === 'hop rahmat' || text === 'Hop raxmat' || text === 'Hop rahmat' || text === 'hop raxmat') {
+//     return bot.sendMessage(chatId, 'Ok')
+// }
