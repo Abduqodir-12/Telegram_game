@@ -29,7 +29,6 @@ const start = () => {
         const text = msg.text;
         const chatId = msg.chat.id;
         if(text === '/start') {
-            // bot.sendSticker(chatId, 'https://tlgrm.eu/_/stickers/364/159/364159a8-d72f-4a04-8aa1-3272dd144b06/8.jpg')
             return bot.sendMessage(chatId, `Asalomu alecom Abduqodir coinga hush kelipsz`)
         }  
         if(text === '/info') {
