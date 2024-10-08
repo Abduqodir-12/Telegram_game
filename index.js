@@ -6,6 +6,8 @@ const chats = {}
 dotenv.config()
 
 const tgToken = process.env.Token;
+console.log(tgToken);
+
 
 const bot = new TelegramApi(tgToken, {polling: true})
 
